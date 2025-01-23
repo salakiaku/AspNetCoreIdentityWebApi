@@ -41,3 +41,7 @@ O projeto é dividido em várias pastas principais:
 
    ```bash
    git clone https://github.com/salakiaku/AspNetCoreIdentityWebApi.git
+
+2. Entre na pasta do projeto:
+   ```bash
+   cd AspNetCoreIdentityWebApi
