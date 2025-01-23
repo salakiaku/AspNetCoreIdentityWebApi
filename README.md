@@ -41,12 +41,10 @@ O projeto é dividido em várias pastas principais:
 
 1. Clone o repositório:
 
-   ```bash
-   git clone https://github.com/salakiaku/AspNetCoreIdentityWebApi.git
+   ```bash git clone https://github.com/salakiaku/AspNetCoreIdentityWebApi.git
 
 2. Entre na pasta do projeto:
-   ```bash
-   cd AspNetCoreIdentityWebApi
+   ```bash cd AspNetCoreIdentityWebApi
    
 3. Restaure as dependências do projeto:
    ```bash dotnet restore
