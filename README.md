@@ -25,8 +25,10 @@ O projeto é dividido em várias pastas principais:
 
 - **Controllers**: Contém os controladores da API, incluindo os endpoints para login, registro de usuário e outros.
 - **Models**: Contém a model User, usado para representar um usário.
-- **DTO**: contém os Data Transfer Object usados para as operações de registro, login, e resposta de autenticação
-- **Data**: Configuração do banco de dados, contexto e migrações.
+- **DTO**: Contém os Data Transfer Object usados para as operações de registro, login, e resposta de autenticação
+- **Data**: Contém o Contexto do Banco de dados (EntityFrameWork DbContext).
+- **Migrations**: Contém as migrations para que será usado para criar a base de dado e as tabelas.
+- **MappingsProfile** : Os perfis de mapeamento das entidade de Dados.
 
 ## Configuração do Ambiente
 
