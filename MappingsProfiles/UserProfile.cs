@@ -10,6 +10,7 @@ namespace AspNetCoreIdentityWebApi.MappingsProfiles
             CreateMap<CreateUserRequestDTO, User>()
                 .ForMember(dest=>dest.UserName, option=>option
                 .MapFrom(sourc=>sourc.Email));
+               
         }
     }
 }

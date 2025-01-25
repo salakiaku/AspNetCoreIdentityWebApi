@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreIdentityWebApi.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TestesController : ControllerBase
@@ -21,6 +20,7 @@ namespace AspNetCoreIdentityWebApi.Controllers
             };
         }
         [HttpGet("Get-list")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Get()
         {
             try

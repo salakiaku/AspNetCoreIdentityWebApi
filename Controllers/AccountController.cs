@@ -38,6 +38,7 @@ namespace AspNetCoreIdentityWebApi.Controllers
                 var result = await _userManager.CreateAsync(mappModel, createUserRequestDTO.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(mappModel, "User");
                     return StatusCode(StatusCodes.Status201Created, new RegistrationResponseDTO() { Success = true, Message = "Usuário criado com sucesso!" });
                 }
                 else
@@ -58,22 +59,25 @@ namespace AspNetCoreIdentityWebApi.Controllers
             var user = await _userManager.FindByNameAsync(userLoginRequestDTO.UserName);
             if (user != null && await _userManager.CheckPasswordAsync(user, userLoginRequestDTO.Password))
             {
-
-                var token = GenerateJwtToken(user);
+                var roles = await _userManager.GetRolesAsync(user);
+                var token = GenerateJwtToken(user, roles);
                 return Ok(new { token });
             }
             else
-                return Unauthorized("Senha incorrecta!");
+                return Unauthorized("Usuário ou Senha incorrecta!");
         }
-        private string GenerateJwtToken(User user)
+        private string GenerateJwtToken(User user, IList<string> Roles)
         {
-            var claims = new[]
+            var claims = new List<Claim>
             {
             new Claim(JwtRegisteredClaimNames.Sub, user.Email),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(ClaimTypes.NameIdentifier, user.Id)
         };
-
+            foreach (var role in Roles) { 
+            claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+            //
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
